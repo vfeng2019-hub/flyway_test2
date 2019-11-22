@@ -1,31 +1,35 @@
 pipeline
 {
   agent any
-    stage('download scripts')
+    stages { 
+        stage('download scripts')
 		{
 			steps{
 			checkout scm
 			}
 		}
 		
+		
 	stage('execute_flyway') {
-		steps {
-			script{
-				try{
-				flywayrunner commandLineArgs: '', credentialsId: '82f548ec-03d5-4055-98c5-7ae8c573e138', flywayCommand: 'info', installationName: 'flyway', locations: '', url: 'jdbc:sqlserver://sqlcnbpm2k:1433;databaseName=BPM4CCM' 
+            steps {
+				script{
+					try{
+					flywayrunner commandLineArgs: '', credentialsId: '82f548ec-03d5-4055-98c5-7ae8c573e138', flywayCommand: 'info', installationName: 'flyway', locations: '', url: 'jdbc:sqlserver://sqlcnbpm2k:1433;databaseName=BPM4CCM' 
+					}
+					catch (Exception e) {
+                        ERROR_MESSAGE = e.getMessage()
+                        ERROR_DETAILS = e
+                        throw e
+					}
+                
 				}
-				catch (Exception e) {
-					ERROR_MESSAGE = e.getMessage()
-					ERROR_DETAILS = e
-					throw e
-				}
-			
 			}
-		}
-	}	
+		}	
 		
 		
+	}
 }
+
 
 
 
