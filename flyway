@@ -8,7 +8,7 @@ pipeline
 			checkout scm
 			}
 		}
-		stage('download scripts')
+		stage('copy scripts')
 		{
 			steps{
     			script{ 
