@@ -3,18 +3,7 @@ pipeline
   agent any
     stages { 
         stage('download scripts'){
-			steps{
-				scripts{
-					try {
-					checkout scm			
-					}
-					catch (Exception e) {
-							ERROR_MESSAGE = e.getMessage()
-							ERROR_DETAILS = e
-							throw e
-					}
-				}
-			}
+			checkout scm
 			
 		}
 		
