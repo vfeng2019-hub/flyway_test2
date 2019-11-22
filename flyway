@@ -8,9 +8,16 @@ pipeline
 			checkout scm
 			}
 		}
+		stage('download scripts')
+		{
+			steps{
+    			script{ 
+    			    'mv $WORKSPACE\\*.sql  C:\\Materials\\Flyway\\flyway-5.1.4\\sql\\'
+    			}
+			}
+		}	
 		
-		
-	stage('execute_flyway') {
+		stage('execute_flyway') {
             steps {
 				script{
 					try{
